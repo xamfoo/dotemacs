@@ -26,12 +26,17 @@
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
+;; Customize org-mode
+(use-package org
+  :ensure t
+  :config
+  ;; Open file in same window
+  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file))
 ;; Initialize package management system and add MELPA repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-;; Install magit if not already installed
 (unless (package-installed-p 'magit)
   (package-install 'magit))

@@ -28,7 +28,7 @@
 (setq global-auto-revert-non-file-buffers t)
 ;; Customize org-mode
 (defun dw/org-mode-setup ()
-  (org-indent-mode)
+  (org-indent-mode 1)
   (variable-pitch-mode 1)
   (auto-fill-mode 0)
   (visual-line-mode 1))

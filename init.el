@@ -22,6 +22,10 @@
 (setq visible-bell t)
 ;; Set default theme
 (load-theme 'modus-operandi t)
+;; Use fontset for emoji
+(setq use-default-font-for-symbols nil)
+;; Touchscreen keyboard always on
+(setq touch-screen-display-keyboard t)
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers

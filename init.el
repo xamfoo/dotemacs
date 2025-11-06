@@ -50,15 +50,19 @@
  ((member "Iosevka Aile" (font-family-list))
   (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 140)))
 (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'append)
-(set-fontset-font t 'symbol (font-spec :family "Noto Emoji") nil 'append
+(set-fontset-font t 'symbol (font-spec :family "Noto Emoji") nil 'append)
 ;; 🥰💀✌️🌴🐢🐐🍄⚽🍻👑📸😬👀🚨🏡🕊️🏆😻🌟🧿🍀🎨🍜
 (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji") nil 'append)
 (set-fontset-font t 'emoji (font-spec :family "Noto Emoji") nil 'append)
 ;; Initialize package management system and add MELPA repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 (unless (package-installed-p 'magit)
   (package-install 'magit))
+(unless (package-installed-p 'eat)
+  (package-install 'eat))

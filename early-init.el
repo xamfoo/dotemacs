@@ -1,6 +1,7 @@
-(if (file-accessible-directory-p "/data/data/com.termux/files")
-    (progn (setenv "HOME" "/data/data/com.termux/files/home")
-	   (setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
-				  (getenv "PATH")))
-	   (push "/data/data/com.termux/files/usr/bin" exec-path)))
-
+(when (string-equal system-type "android")
+  ;; Add Termux binaries to PATH environment
+  (let* ((termux-prefix "/data/data/com.termux")
+	 (termux-path (concat termux-prefix "/files/usr/bin")))
+    (setenv "PATH" (concat (getenv "PATH") ":" termux-path))
+    (setq exec-path (append exec-path (list termux-path)))
+    (setenv "HOME" (concat termux-prefix "/files/home"))))

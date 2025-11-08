@@ -30,18 +30,6 @@
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
-;; Customize org-mode
-(defun dw/org-mode-setup ()
-  (org-indent-mode 1)
-  (variable-pitch-mode 1)
-  (auto-fill-mode 0)
-  (visual-line-mode 1))
-(use-package org
-  :ensure t
-  :hook (org-mode . dw/org-mode-setup)
-  :config
-  ;; Open file in same window
-  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file))
 ;; Set default fonts
 (cond
  ((member "Iosevka Fixed" (font-family-list))
@@ -49,11 +37,11 @@
 (cond
  ((member "Iosevka Aile" (font-family-list))
   (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 140)))
-(set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'append)
-(set-fontset-font t 'symbol (font-spec :family "Noto Emoji") nil 'append)
 ;; 🥰💀✌️🌴🐢🐐🍄⚽🍻👑📸😬👀🚨🏡🕊️🏆😻🌟🧿🍀🎨🍜
 (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji") nil 'append)
 (set-fontset-font t 'emoji (font-spec :family "Noto Emoji") nil 'append)
+(set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+(set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
 ;; Initialize package management system and add MELPA repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -62,7 +50,31 @@
   (package-refresh-contents))
 (unless (package-installed-p 'magit)
   (package-install 'magit))
+(unless (package-installed-p 'org-superstar)
+  (package-install 'org-superstar))
 (unless (package-installed-p 'vterm)
   (package-install 'vterm))
 (if (stringp termux-emacs-vterm-dir)
-  (use-package vterm :load-path termux-emacs-vterm-dir))
+    (use-package vterm :load-path termux-emacs-vterm-dir))
+;; Customize org-mode
+(defun dw/org-mode-setup ()
+  (org-indent-mode 1)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (org-superstar-mode 1))
+(use-package org
+  :ensure t
+  :hook (org-mode . dw/org-mode-setup)
+  :config
+  ;; Open file in same window
+  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file))
+(use-package org-faces
+  :ensure nil
+  :custom-face
+  (org-table ((nil (:inherit fixed-pitch))))
+  (org-block ((nil (:inherit fixed-pitch :foreground nil))))
+  (org-code ((nil (:inherit (shadow fixed-pitch)))))
+  (org-indent ((nil (:inherit (org-hide fixed-pitch)))))
+  (org-special-keyword ((nil (:inherit (font-lock-comment-face fixed-pitch)))))
+  (org-list-dt ((nil (:inherit fixed-pitch)))))

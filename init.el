@@ -31,6 +31,8 @@
 (global-auto-revert-mode 1)
 ;; Revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
+;; Disable text-conversion by default
+(setq overriding-text-conversion-style nil)
 ;; Set default fonts
 (cond
  ((member "Iosevka Fixed" (font-family-list))

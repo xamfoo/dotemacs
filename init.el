@@ -42,6 +42,7 @@
   (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 140)))
 ;; 🥰💀✌️🌴🐢🐐🍄⚽🍻👑📸😬👀🚨🏡🕊️🏆😻🌟🧿🍀🎨🍜
 (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji") nil 'append)
+(set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji") nil 'append)
 (set-fontset-font t 'emoji (font-spec :family "Noto Emoji") nil 'append)
 (set-face-attribute 'line-number nil :inherit 'fixed-pitch :height 100)
 (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch :height 100)

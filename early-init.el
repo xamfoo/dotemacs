@@ -1,4 +1,6 @@
 ;; -*- lexical-binding: t; -*-
+(defvar termux-emacs-vterm-dir nil
+  "Default location of emacs vterm module")
 (when (string-equal system-type "android")
   (let* ((termux-prefix "/data/data/com.termux")
          (termux-path (concat termux-prefix "/files/usr/bin"))
@@ -19,6 +21,5 @@
     (setenv "SHELL" termux-shell)
     (setq shell-file-name termux-shell)
     (setenv "HOME" termux-home)
-    (defvar termux-emacs-vterm-dir
-      (concat termux-home "/.local/opt/emacs-libvterm")
-      "Default location of emacs vterm module")))
+    (setq termux-emacs-vterm-dir
+	  (concat termux-home "/.local/opt/emacs-libvterm"))))

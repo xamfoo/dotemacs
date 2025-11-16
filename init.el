@@ -75,15 +75,16 @@
   (org-super-agenda-mode 1)
   (setq org-habit-graph-column 50
 	org-habit-show-all-today t))
-(defun dw/org-after-local-vars ()
-  "Set project agenda files after local variables are applied."
-  (when (and (eq major-mode 'org-mode)
-             (boundp 'project-org-agenda-files))
-    (setq org-agenda-files project-org-agenda-files))
-  (when (and (eq major-mode 'org-mode)
-             (boundp 'project-org-agenda-custom-commands))
-    (setq org-agenda-custom-commands project-org-agenda-custom-commands)))
-(add-hook 'hack-local-variables-hook #'dw/org-after-local-vars)
+;; Disable block until we check if .dir-locals.el can be converted to non-eval
+;; (defun dw/org-after-local-vars ()
+;;   "Set project agenda files after local variables are applied."
+;;   (when (and (eq major-mode 'org-mode)
+;;              (boundp 'project-org-agenda-files))
+;;     (setq org-agenda-files project-org-agenda-files))
+;;   (when (and (eq major-mode 'org-mode)
+;;              (boundp 'project-org-agenda-custom-commands))
+;;     (setq org-agenda-custom-commands project-org-agenda-custom-commands)))
+;; (add-hook 'hack-local-variables-hook #'dw/org-after-local-vars)
 (use-package org
   :ensure t
   :hook (org-mode . dw/org-mode-setup)
